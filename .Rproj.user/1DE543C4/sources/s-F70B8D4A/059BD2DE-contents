@@ -1,0 +1,147 @@
+--- 
+title: "Chapter 4"
+author: "Jae-Ho Yoon"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+---
+
+
+# The Simple Linear Regression Model
+
+
+## LOAD DATA 
+
+```{r , echo = TRUE}
+food = read.table(url("http://www.principlesofeconometrics.com/poe4/data/dat/food.dat"),header=F)
+```
+
+```{r , echo = TRUE}
+head(food)         
+```
+
+## DATA Summary
+
+```{r , echo = TRUE}
+summary(food)      # Summary statistics 
+```
+
+## Plot Data
+
+```{r }
+plot(food)         # Plot matrix 
+```
+
+
+# Model
+
+$$ Y_{i} = \alpha + \beta X_{i} + e_{i} $$
+
+
+## Variables  
+
+```{r }
+x = food[,2]   # Income
+y = food[,1]   # Food Expenditure
+```
+
+
+## Estimation 
+
+```{r }
+reg <- lm(y ~ x)
+```
+
+
+## Results
+
+```{r }
+summary(reg)  
+```
+
+
+##  b1, b2 
+
+```{r }
+b1 <- coef(reg)[[1]] 
+b2 <- coef(reg)[[2]]
+
+b1
+b2
+```
+
+# Prediction   
+
+```{r }
+N <- 40
+sde <- 89.52
+y1 <- b1+b2*x+rnorm(N, mean=0, sd=sde)
+
+y2 <- data.frame()
+y2 <- cbind(y1, y)
+
+```
+
+## Least sqaures prediction (one time)  
+
+```{r }
+matplot(y1, type='l', col=1:40,
+        xlab='Income', ylab='Food Expenditure', 
+        main ='Prediction N=1 ')
+
+```
+
+## Least sqaures prediction (one time)  
+
+```{r }
+matplot(y2, type='l', col=1:40,
+        xlab='Income', ylab='Food Expenditure', 
+        main ='Food Expenditure vs. Prediction ')
+```
+
+## Least sqaures prediction (1,000 times)  
+
+```{r }
+b1 <- coef(reg)[[1]] 
+b2 <- coef(reg)[[2]]
+yy <- data.frame()
+
+trial <- 1
+trials <- 1000
+while(trial <= trials) {
+  y3 <- b1+b2*x+rnorm(N, mean=0, sd=sde)
+  yy <- rbind(yy, t(y3))
+  trial <- trial + 1
+}
+
+```
+
+## Least sqaures prediction (1,000 times)  
+
+```{r }
+matplot(t(yy), type='l', col=1:40,
+        xlab='Income', ylab='Food Expenditure', 
+        main ='Prediction N=1000 ')
+```
+
+## Save DATA
+
+sink('ch4.out')
+```{r }
+# Least sqaures prediction (one time) 
+
+y1
+
+```
+sink()
+
+
+# References 
+- Principles of Econometrics with R 
+<https://bookdown.org/ccolonescu/RPoE4/>
+- Principles of Econometrics  
+<http://www.principlesofeconometrics.com/poe4/poe4.htm>
+- Beowulfkorea  
+<https://sites.google.com/site/beowulfkorea/yoon/r> 
+
