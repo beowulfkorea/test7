@@ -8,7 +8,7 @@ documentclass: book
 ---
 
 
-# 단순회위 모형
+# 단순회귀 모형
 
 
 ## 데이타 
