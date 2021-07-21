@@ -38,6 +38,15 @@ plot(food)         # Plot matrix
 
 $$ Y_{i} = \alpha + \beta X_{i} + e_{i} $$
 
+## 모형 가정
+
+$$
+The \ variable \ e_{i} \ is \ random \ (= stochastic) \\    
+E(e_{i}) = 0, \  \ var(e_{i}^2) = \sigma^2, \  \ cov(e_{j},e_{k}) =0 \\  
+The \ variable \ X_{i} \ is \ not \ random \  (= nonstochastic) \\    
+E(X_{i} \ e_{i}) = 0 \\
+e_{i} \sim N(0,\sigma^2)  \\
+$$
 
 ## 변수  
 

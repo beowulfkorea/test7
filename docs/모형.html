@@ -24,7 +24,7 @@
 <meta name="author" content="윤 재호" />
 
 
-<meta name="date" content="2021-07-20" />
+<meta name="date" content="2021-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,10 +145,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="모형.html"><a href="모형.html"><i class="fa fa-check"></i><b>2</b> 모형</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="모형.html"><a href="모형.html#변수"><i class="fa fa-check"></i><b>2.1</b> 변수</a></li>
-<li class="chapter" data-level="2.2" data-path="모형.html"><a href="모형.html#추정"><i class="fa fa-check"></i><b>2.2</b> 추정</a></li>
-<li class="chapter" data-level="2.3" data-path="모형.html"><a href="모형.html#추정-결과"><i class="fa fa-check"></i><b>2.3</b> 추정 결과</a></li>
-<li class="chapter" data-level="2.4" data-path="모형.html"><a href="모형.html#b1-b2"><i class="fa fa-check"></i><b>2.4</b> b1, b2</a></li>
+<li class="chapter" data-level="2.1" data-path="모형.html"><a href="모형.html#모형-가정"><i class="fa fa-check"></i><b>2.1</b> 모형 가정</a></li>
+<li class="chapter" data-level="2.2" data-path="모형.html"><a href="모형.html#변수"><i class="fa fa-check"></i><b>2.2</b> 변수</a></li>
+<li class="chapter" data-level="2.3" data-path="모형.html"><a href="모형.html#추정"><i class="fa fa-check"></i><b>2.3</b> 추정</a></li>
+<li class="chapter" data-level="2.4" data-path="모형.html"><a href="모형.html#추정-결과"><i class="fa fa-check"></i><b>2.4</b> 추정 결과</a></li>
+<li class="chapter" data-level="2.5" data-path="모형.html"><a href="모형.html#b1-b2"><i class="fa fa-check"></i><b>2.5</b> b1, b2</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="예측.html"><a href="예측.html"><i class="fa fa-check"></i><b>3</b> 예측</a>
 <ul>
@@ -182,17 +183,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="모형" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> 모형</h1>
 <p><span class="math display">\[ Y_{i} = \alpha + \beta X_{i} + e_{i} \]</span></p>
-<div id="변수" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> 변수</h2>
+<div id="모형-가정" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 모형 가정</h2>
+<p><span class="math display">\[
+The \ variable \ e_{i} \ is \ random \ (= stochastic) \\    
+E(e_{i}) = 0, \  \ var(e_{i}^2) = \sigma^2, \  \ cov(e_{j},e_{k}) =0 \\  
+The \ variable \ X_{i} \ is \ not \ random \  (= nonstochastic) \\    
+E(X_{i} \ e_{i}) = 0 \\
+e_{i} \sim N(0,\sigma^2)  \\
+\]</span></p>
+</div>
+<div id="변수" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 변수</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="모형.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> food[,<span class="dv">2</span>]   <span class="co"># Income</span></span>
 <span id="cb7-2"><a href="모형.html#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> food[,<span class="dv">1</span>]   <span class="co"># Food Expenditure</span></span></code></pre></div>
 </div>
-<div id="추정" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> 추정</h2>
+<div id="추정" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> 추정</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="모형.html#cb8-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span></code></pre></div>
 </div>
-<div id="추정-결과" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> 추정 결과</h2>
+<div id="추정-결과" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> 추정 결과</h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="모형.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg)  </span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -213,8 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.385,  Adjusted R-squared:  0.3688 
 ## F-statistic: 23.79 on 1 and 38 DF,  p-value: 1.946e-05</code></pre>
 </div>
-<div id="b1-b2" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> b1, b2</h2>
+<div id="b1-b2" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> b1, b2</h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="모형.html#cb11-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">coef</span>(reg)[[<span class="dv">1</span>]] </span>
 <span id="cb11-2"><a href="모형.html#cb11-2" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fu">coef</span>(reg)[[<span class="dv">2</span>]]</span>
 <span id="cb11-3"><a href="모형.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
